@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Oxford 3000: İngilizce Öğren — SSS / FAQ</title>
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="description" content="Oxford 3000 hakkında sık sorulan sorular. Uygulama kullanımı, gizlilik ve destek konularına dair yanıtlar." />
+    <style>
+      main section {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <a class="brand" href="./">
+          <div class="logo">iA</div>
+          <div>
+            <div style="font-weight: 700">İbrahim Aykut</div>
+            <div id="page-title" class="small">SSS • FAQ</div>
+          </div>
+        </a>
+        <nav class="lang">
+          <a class="active" href="#tr">TR</a>
+          <a href="#en">EN</a>
+        </nav>
+      </header>
+
+      <main>
+        <a
+          href="./"
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1;
+          "
+        >
+          <span style="font-size: 18px; line-height: 1; display: flex; align-items: center">←</span>
+          <span id="back-text" style="text-decoration: underline; line-height: 1">Geri</span>
+        </a>
+
+        <section id="tr" class="card">
+          <h1>Sık Sorulan Sorular</h1>
+          <p><strong>Oxford 3000 ücretli mi?</strong><br />Hayır. Oxford 3000 ücretsizdir ve reklam içermez.</p>
+          <p>
+            <strong>Hangi verileri topluyorsunuz?</strong><br />Anonim kullanım istatistikleri ve çökme raporları. Kişisel veri toplamıyoruz. Ayrıntı
+            için <a href="./privacy.html">Gizlilik Politikası</a>.
+          </p>
+          <p>
+            <strong>Geri bildirimimi nasıl paylaşabilirim?</strong><br /><a href="mailto:hello.ibrahimaykut@gmail.com"
+              >hello.ibrahimaykut@gmail.com</a
+            >
+            adresine e-posta atabilirsin.
+          </p>
+        </section>
+
+        <section id="en" class="card">
+          <h1>FAQ</h1>
+          <p><strong>Is Oxford 3000 paid?</strong><br />No. Oxford 3000 is free and contains no ads.</p>
+          <p>
+            <strong>What data do you collect?</strong><br />Anonymous usage analytics and crash reports only. We do not collect personal data. See the
+            <a href="./privacy.html">Privacy Policy</a>.
+          </p>
+          <p>
+            <strong>How can I share feedback?</strong><br />Send an email to
+            <a href="mailto:hello.ibrahimaykut@gmail.com">hello.ibrahimaykut@gmail.com</a>.
+          </p>
+        </section>
+      </main>
+
+      <footer class="footer">© {year} İbrahim Aykut • Oxford 3000</footer>
+    </div>
+    <script>
+      document.querySelector(".footer").innerHTML = document.querySelector(".footer").innerHTML.replace("{year}", new Date().getFullYear());
+    </script>
+    <script>
+      const langs = document.querySelectorAll(".lang a");
+      const sections = document.querySelectorAll("main section");
+
+      function setLang(lang) {
+        sections.forEach((sec) => {
+          sec.style.display = sec.id === lang ? "block" : "none";
+        });
+        langs.forEach((a) => {
+          a.classList.toggle("active", a.getAttribute("href") === "#" + lang);
+        });
+
+        // Update back button text
+        const backText = document.getElementById("back-text");
+        if (backText) {
+          backText.textContent = lang === "tr" ? "Geri" : "Back";
+        }
+
+        // Update page title text
+        const pageTitle = document.getElementById("page-title");
+        if (pageTitle) {
+          pageTitle.textContent = lang === "tr" ? "Sık Sorulan Sorular" : "FAQ";
+        }
+      }
+
+      langs.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const lang = link.getAttribute("href").replace("#", "");
+          setLang(lang);
+          localStorage.setItem("zoneLang", lang);
+        });
+      });
+
+      const saved = localStorage.getItem("zoneLang") || "tr";
+      setLang(saved);
+    </script>
+  </body>
+</html>
